@@ -210,6 +210,96 @@ capitals.clear()
 capitals.pop("China")
 capitals.popitem()
 '''
+#RANDOM NUMBERS 
+'''
+import random
+low = 1
+high = 100
+
+options = ("rock", "paper", "scissors")
+cards = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
+
+#number = random.randint(low, high)
+#number = random.randint(1, 6)
+#number = random.random()
+#option = random.choice(options)
+random.shuffle(cards)
+
+print(cards)
+'''
+#NUMBER GUESSING GAME
+'''
+import random
+
+print("--------VÍTEJ A POKUS SE UHODNOUT MÉ ČÍSLO (1-100)--------")
+cislo = random.randint(1,100)
+
+guess = int(input("Jaké číslo si myslíš že to je: "))
+pokus = 1
+
+while guess != cislo:
+    pokus+=1
+    if guess > cislo:
+        print("Oh ou, mé číslo je MENŠÍ")
+    else:
+        print("Ufff moje číslo je VĚTŠÍ")
+    guess = int(input("Zkus to ZNOVU: "))
+print(f"GRATULUJU UHODL JSI TO ZA {pokus}. POKUSŮ/Y. MÉ ČÍSLO BYLO {cislo}!")
+'''
+#ROCK, PAPER, SCISSORS
+'''
+import random
+
+volby = ["papir", "kamen", "nuzky"]
+score = 0
+
+
+print("----------------VÍTEJ VE HŘE KÁMEN, NŮŽKY, PAPÍR----------------")
+
+while True:
+    volba = random.choice(volby)
+    userVolba = input("Zadej tvou volbu (nuzky, papir, kamen) q to leave: ").lower()
+
+    if(userVolba=="nuzky" and volba=="papir"):
+        print(f"GRATULUJI VYHRÁL JSI S {userVolba}. Oponent vybral {volba}") 
+        score += 1
+    
+    elif(userVolba=="nuzky" and volba=="kamen"):
+        print(f"UPS.. PROHRÁL JSI S {userVolba}. Oponent vybral {volba}")
+        score -= 1
+    
+    elif(userVolba=="nuzky" and volba=="nuzky"):
+        print(f"TOHLE KOLO JE REMÍZA {userVolba}. Oponent vybral {volba}")
+    
+    elif(userVolba=="kamen" and volba=="nuzky"):
+        print(f"GRATULUJI VYHRÁL JSI S {userVolba}. Oponent vybral {volba}")
+        score += 1
+    
+    elif(userVolba=="kamen" and volba=="papir"):
+        print(f"UPS.. PROHRÁL JSI S {userVolba}. Oponent vybral {volba}")
+        score -= 1
+    
+    elif(userVolba=="kamen" and volba=="kamen"):
+        print(f"TOHLE KOLO JE REMÍZA {userVolba}. Oponent vybral {volba}")
+    
+    elif(userVolba=="papir" and volba=="kamen"):
+        print(f"GRATULUJI VYHRÁL JSI S {userVolba}. Oponent vybral {volba}")
+        score += 1
+    
+    elif(userVolba=="papir" and volba=="nuzky"):
+        print(f"UPS.. PROHRÁL JSI S {userVolba}. Oponent vybral {volba}")
+        score -= 1
+    
+    elif(userVolba=="papir" and volba=="papir"):
+        print(f"TOHLE KOLO JE REMÍZA {userVolba}. Oponent vybral {volba}")
+    
+    elif(userVolba == "q"):
+        break
+
+    else:
+        print("Zadal jsi špatnou volbu! Zkus to znovu.")
+    print(f"Tvoje skóre je: {score}")
+'''
 
 
 
