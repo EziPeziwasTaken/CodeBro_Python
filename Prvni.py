@@ -300,6 +300,150 @@ while True:
         print("Zadal jsi špatnou volbu! Zkus to znovu.")
     print(f"Tvoje skóre je: {score}")
 '''
+#FUNCITONS - POSITIONAL arguments - Argumenty  co se přiřazují podle pořadí
+'''
+def happy_birth(name, age):
+    print(f"Happy birthday {name}!")
+    print(f"You are {age} old!")
+    if(age >= 18):
+        print("ufff, thats really old!")
+    else:
+        print("Hey you are pretty young!")
+    return 0
+
+happy_birth(input("Zadej jméno: "), int(input("Zadej tvůj věk: ")))
+
+def add(x,y):
+    z = x + y
+    return z
+
+print(add(5,4))
+
+def create_name(firstName, LastName):
+    firstName = firstName.capitalize()
+    LastName = LastName.capitalize()
+    return firstName +" "+ LastName
+
+fullName = create_name(input("Zadej své jméno: "), input("Zadej své přijmení: ")) 
+print(fullName)
+'''
+#DEFAULT arguments = funkce která má pro některý parametr přednastavenou hodnotu.
+'''
+def net_price(list_price, discount = 0.0, tax = 0.05):
+    return list_price * (1 - discount) * (1 + tax)
+
+print(net_price(500))
+print(net_price(500, 0.1))
+print(net_price(500, 0.1, 0))
+'''
+#KEYWORD arguments = Argument přiřadím podle jména parametru, nezáleží na pořadí.
+'''
+def hello(greeting, title, first, last):
+    print(f"{greeting} {title} {first} {last}")
+
+hello("Hello", title="Mr.", last= "Squarepants", first="Spongebob")
+
+for x in range(1,11):
+    print(x)
+
+print("1", "2", "3", "4", "5", "6", "7", sep="-")
+
+def get_phone(country, area, first, last):
+    return f"{country}-{area}-{first}-{last}"
+
+phone_num = get_phone(country="1", area="123", first="456", last="7890")
+
+print(phone_num)
+'''
+# ARBITRARY arguments
+# *args     = allows you to pass multiple non-key arguements. Používají se, když nevíš předem, kolik argumentů bude (získám Tuple).
+# **kwargs  = allows you to pass multiple keywords-argumetns. Libovolný počet pojmenovaných argumentů (získám dict).
+# *         = unpacking operátor - Rozbalí prvky do pozicních argumentů.
+# **        = unpacking operátor - Rozbalí klíče a hodnoty do pojmenovaných argumentů.
+'''
+
+def add(*args):             # Může to být i *nums nebo cokoliv akorát s **
+    #print(type(args))
+    total =  0
+    for arg in args:
+        total += arg
+    return total
+
+print(add(1,2,3,4,5))
+
+def display_name(*names):
+    for name in names:
+        print(name, end=" ")
+    
+display_name("Dr.", "Spongebob", "Harold","Squarepants", "III")
+
+def print_address(**kwargs):
+    for key, value in kwargs.items():
+        print(f"{key}: {value}")
+
+print_address(street="123 Fake St.",
+              apt="100" 
+              city="Detroid", 
+              state="MI", 
+              zip="54321")
+
+def shipping_label(*args, **kwargs):
+    for arg in args:
+        print(arg, end=" ")
+    print()
+    
+    if ("apt" in kwargs):
+        print(f"{kwargs.get('street')} {kwargs.get('apt')}")
+    elif ("PObox" in kwargs):
+        print(f"{kwargs.get('street')} {kwargs.get('PObox')}")
+    else:
+        print(f"{kwargs.get('street')}")
+    
+    print(f"{kwargs.get('city')} {kwargs.get('state')}")
+
+shipping_label("Dr.", "Spongebob", "Squarepants", "III",
+               street="123 Fake St.",
+               PObox="PO box #1001",
+               city="Detroid", 
+               state="MI", 
+               zip="54321" )
+'''
+#ITERABLES - Categorie, pokud objekt/kolekce může vrátit svůj element jeden po druhém.
+#          - Což dovoluje ho v cyklu iterovat
+'''
+numbers = (1, 2, 3, 4, 5)
+
+for number in reversed(numbers):
+    print(number)
+
+fruits = {"apple", "orange", "banana", "coconut"}
+
+for fruit in reversed(fruits):
+    print(fruit)
+
+name = "Honza Novy"
+
+for character in name:
+    print(character, end="")
+
+my_dictionary = {"A": 1, "B": 2, "C": 3}
+
+for key, value in my_dictionary.items():
+    print(f"{key} = {value}")
+'''
+#COUNT UP TIMER
+'''
+import time
+
+def count(start = 0, end = 10):
+    for x in reversed(range(start, end+1)):
+        print(x)
+        time.sleep(1)
+    print("DONE!")
+
+count(5, 10)
+     
+'''
 
 
 
