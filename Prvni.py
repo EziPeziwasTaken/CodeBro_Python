@@ -444,6 +444,123 @@ def count(start = 0, end = 10):
 count(5, 10)
      
 '''
+#MEMBERSHIP OPERATORS - Je tato hodnota v uvnitř tohoto?
+#                     - String, tupple, set, list, dictionary
+#                     - in, not in
+'''
+znamky = {"Sandy" : "A",
+          "Spongebob" : "C",
+          "Squidward" : "B",
+          "Patrick" : "D"}
+
+student = input("Zadej jméno studenta kterého známky bys chtěl vidět: ")
+
+if student in znamky:
+    print(f"Známka {student} je {znamky[student]}.")
+else:
+    print(f"{student} nebyl nalezen")
+
+email = "Stanley@gmail.com"
+
+if "@" in email and "." in email:
+    print(f"{email} je validní emailová adresa")
+else:
+    print(f"{email} není validní!")
+'''
+#LIST COMPREHENSION = Umožňuje vytvářet nové seznamy z existujících iterovatelných objektů
+#                     pomocí stručného zápisu. Zahrnuje volitelnou podmínku a výraz, který se
+#                     aplikuje na každý prvek iterace.
+'''
+doubles = []
+for x in range(1,11):
+    doubles.append(x * 2)
+print(doubles)
+
+doubles = [x * 2 for x in range(1,11)]
+print(doubles)
+
+triples = [y * 3 for y in range(1, 11)]
+print(triples)
+
+square = [z * z for z in range(1, 11)]
+print(square)
+
+fruits = [fruit.upper() for fruit in ["apple", "orange", "banana", "coconut"]]
+print(fruits)
+
+fruits = ["apple", "orange", "banana", "coconut"]
+fruit_chars = [fruit.upper()[0] for fruit in fruits]
+print(fruit_chars)
+
+numbers = [1, -2, 3, -4, 5, -6]
+positive_nums = [num for num in numbers if num >= 0]
+even_nums = [num for num in numbers if num % 2 == 0]
+print(even_nums)
+
+grades = [85, 42, 72, 90, 79, 56, 61, 30, 14]
+passing_grades = [grade for grade in grades if grade >= 55]
+print(passing_grades)
+'''
+# Match-case statement (SWITCH) = Prostě switch (python 3.10)
+'''
+def den_v_tydnu(den):
+    match den:
+        case 1:
+            return "Je pondělí"
+        case 2:
+            return "Je Úterý"
+        case 3:
+            return "Je Středa"
+        case 4:
+            return "Je Čtvrtek"
+        case 5:
+            return "Je Pátek"
+        case 6:
+            return "Je Sobota (konečně)"
+        case 7:
+            return "Je Neděle (zítra je Pondělí :( )"
+        case _: #WildCard
+            return "Musíš zadat den v týdnu"
+print(den_v_tydnu(9))
+'''
+#Module = Modul v Pythonu je soubor obsahující kód (funkce, třídy, proměnné), 
+#         který lze importovat a znovu použít v jiných programech.
+#         Umožňuje organizovat kód do logických celků a zlepšuje jeho přehlednost a znovupoužitelnost.
+#         priklad.py
+'''
+import math as m
+from math import e
+
+import priklad
+
+result = priklad.cube(3)
+result = priklad.circumference(3)
+result = priklad.square(3)
+result = priklad.area(3)
+
+print(result)
+'''
+# VARIABLE SCOPE    = Kde je proměnná viditelná a dostupná
+# SCOPE RESOLUTION  = (LEGB) Local -> Enclosed -> Global -> Built-in
+
+'''
+from math import e
+
+def func1():
+    print(e)
+e = 3
+func1()
+'''
+# if __name__ == '__main__' = (tento skript může být imported OR run standalone)
+#                             Funkce a třídy v tomtu modulu mohou být znovuvyužity
+#                             bez bloku main of code executing
+'''
+def main():
+    # Your program goes here
+
+if __name__ == '__main__':
+    main()
+'''
 
 
 
