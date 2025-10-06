@@ -561,6 +561,283 @@ def main():
 if __name__ == '__main__':
     main()
 '''
+# PYTHON BANKING PROBLEM
+'''
+def show_balance(balance):
+    print(f"Tvůj balance: {balance:.2f} Czk")
+
+def deposit():
+    amount = float(input("Zadej hodnotu kterou chete vložit: "))
+    if amount < 0:
+        print("To není platný vklad!")
+        return 0
+    else:
+        return amount
+
+def withdraw(balance):
+    amount = float(input("Zadej hodnotu kterou chceš vybrat: "))
+
+    if amount > balance:
+        print("Nedostatek financí!")
+        return 0
+    elif amount < 0:
+        print("To není platný výběr!")
+        return 0
+    else:
+        return amount
+
+def main():
+    balance = 0
+    is_running = True
+
+    while is_running:
+        print("Bankovní Program")
+        print("1. Show Balance")
+        print("2. Deposit")
+        print("3. Withdraw")
+        print("4. Exit")
+
+        choice = input("Zadej svůj výběr (1-4): ")
+
+        if choice == "1": 
+            show_balance(balance)
+        elif choice == "2":
+            balance += deposit()
+        elif choice == "3":
+            balance -= withdraw(balance)
+        elif choice == "4":
+            is_running = False
+        else:
+            print("To není platná možnost")
+
+    print("Děkuji, přeji krásný zbytek dne!")
+if __name__ == '__main__':
+    main()
+'''
+#SLOT MACHINE
+'''
+import random
+def spin_row():
+    symbols = ["🍉","🍋","🍍","🥝","🍑"]
+
+    return [random.choice(symbols) for symbol in range(3)]
+
+def print_row(row):
+    print("*************")
+    print(" | ".join(row))
+    print("*************")
+
+def get_payout(row, bet):
+    if row[0] == row[1] == row[2]:
+        if row[0] == "🍉":
+            return bet*3
+        elif row[0] == "🍋":
+            return bet*5
+        elif row[0] == "🍍":
+            return bet*10
+        elif row[0] == "🥝":
+            return bet*20
+        elif row[0] == "🍑":
+            return bet*100
+    return 0
+
+def main():
+    balance = 100
+
+    print("************************")
+    print("Vítej v Python Točce!")
+    print("Symboly: 🍉 🍋 🍍 🥝 🍑")
+    print("************************")
+    
+    while balance > 0:
+        print(f"Aktuální balanc: {balance} Czk")
+
+        bet = input("Zadej svou sázku: ")
+
+        if not bet.isdigit():
+            print("Prosím zadej validní hodnotu")
+            continue
+
+        bet = int(bet)
+
+        if bet > balance:
+            print("Nedostatek prostředků!")
+            continue
+        if bet <= 0:
+            print("Sázka musí být větší než 0")
+            continue
+
+        balance -= bet
+        row = spin_row()
+        print("Spinning...\n")
+        print_row(row)
+
+        payout = get_payout(row, bet)
+        if payout > 0:
+            print(f"VYHRÁL JSI {payout} Czk")
+        else:
+            print("UFFF, PROHRÁL JSI")
+        balance += payout
+
+        play_again = input("Chce hrát znovu? (Y/N)").upper()
+
+        if play_again != "Y":
+            break
+    print("************************************************")
+    print(f"KONEC HRY! Tvůj finální balanc je {balance} Czk")
+    print("************************************************")
+
+if __name__ == '__main__':
+    main()
+'''
+#ENCRYPTION PROGRAM
+'''
+import random
+import string
+
+chars = string.punctuation + string.digits + string.ascii_letters + " "
+
+chars = list(chars)
+key = chars.copy()
+
+random.shuffle(key)
+
+#print(f"chars : {chars}")
+#print(f"key : {key}")
+
+plain_text = input("Zadej zprávu kterou bys chtěl zašifrovat: ")
+cipher_text = ""
+Yplain_text = ""
+
+for letter in plain_text:
+    index = chars.index(letter)
+    cipher_text += key[index]
+
+    
+for letter in cipher_text:
+    Yindex = key.index(letter)
+    Yplain_text += chars[Yindex]
+
+
+print(f"originál: {plain_text}")
+print(f"Šifrovaný: {cipher_text}")
+print(f"Asi? {Yplain_text}")
+'''
+#HANGMAN GAME
+
+import random
+
+pocet_chyb = 0  
+isRunning = True
+blank = []
+
+def vykres_panacka():
+    obesenec = ['''
+            +---+
+            |   |
+                |
+                |
+                |
+                |
+            =========''', '''
+            +---+
+            |   |
+            O   |
+                |
+                |
+                |
+            =========''', '''
+            +---+
+            |   |
+            O   |
+            |   |
+                |
+                |
+            =========''', '''
+            +---+
+            |   |
+            O   |
+           /|   |
+                |
+                |
+            =========''', '''
+            +---+
+            |   |
+            O   |
+           /|\  |
+                |
+                |
+            =========''', '''
+            +---+
+            |   |
+            O   |
+           /|\  |
+           /    |
+                |
+            =========''', '''
+            +---+
+            |   |
+            O   |
+           /|\  |
+           / \  |
+                |
+            =========''']
+    print(obesenec[pocet_chyb])
+
+def logika(guess, slovo):
+    pozice = slovo.find(guess)
+    if pozice != -1:
+        for x in range(0, len(slovo)):
+            if slovo[x] == guess:
+                blank[x] = guess
+        print(f"SPRÁVNĚ, {guess} tam je!")
+        print(blank)
+
+    else:
+        global pocet_chyb
+        pocet_chyb += 1
+        print(f"Ufff bohužel písmeno {guess} tam není!")
+        vykres_panacka()
+        print(blank)
+
+def prohra(slovo):
+    print("********************************")
+    print(f"PROHRÁL JSI! SLOVO BYLO: {slovo}")
+    print("\tDĚKUJU TI ZA HRU!")
+    print("********************************")
+
+def vyhra(slovo):
+    print("********************************")
+    print(f"VYHRÁL JSI! SLOVO BYLO: {slovo}")
+    print("\tDĚKUJU TI ZA HRU!")
+    print("********************************")
+
+def main():
+    print("**********************")
+    print("VÍTEJ V HŘE HANGMAN!")
+    print("**********************")
+    vykres_panacka()
+    slovnik = ("strom","koule","pizza")
+    slovo = random.choice(slovnik)
+    print(slovo)
+    
+    for x in range(0,len(slovo)):
+        blank.append("_")
+    print(blank)
+    while isRunning:
+        guess = input("Zadej písmeno které si myslíš že tam je: ")
+        logika(guess.lower(), slovo)
+        if pocet_chyb == 6:
+            prohra(slovo)
+            break
+        elif blank == list(slovo):
+            vyhra(slovo)
+            break
+        
+
+if __name__ == "__main__":
+    main()
+
 
 
 
