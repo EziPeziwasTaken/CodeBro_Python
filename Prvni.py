@@ -724,7 +724,7 @@ print(f"Šifrovaný: {cipher_text}")
 print(f"Asi? {Yplain_text}")
 '''
 #HANGMAN GAME
-
+'''
 import random
 
 pocet_chyb = 0  
@@ -837,6 +837,195 @@ def main():
 
 if __name__ == "__main__":
     main()
+'''
+# OBJECT ORIENTED PROGRAMING
+
+#object = „Balíček“ souvisejících vlastností (proměnných) a metod (funkcí).
+#          Například: telefon, hrnek, kniha.
+#          Abychom mohli vytvářet mnoho takových objektů, potřebujeme třídu.
+
+#class  =  Třída je jako plán nebo šablona, podle které se určuje, 
+#          jak bude objekt vypadat a co bude umět.
+'''
+from car import Auto
+
+
+auto1 = Auto("Skoda", 2025, "Oranzova", True)
+print(auto1.barva)
+auto1.drive()
+auto1.popis()
+'''
+#CLASS VARIABLES = sdílené mezi všemi instancemi třídy. (self.model = model <-- )
+#                  Jsou definovány mimo konstruktor (obvykle přímo uvnitř těla třídy) 
+#                  Umožňují sdílení společných dat mezi všemi objekty, které byly z dané třídy vytvořeny 
+'''
+class Student:
+
+    class_year = 2025
+    num_students = 0
+
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+        Student.num_students += 1
+
+student1 = Student("Spongebob", 30)
+student2 = Student("Patrick", 35)
+student3 = Student("Sandy", 25)
+student4 = Student("Squidward", 55)
+
+print(student2.name)
+print(student2.age)
+print(Student.class_year)
+
+print(Student.num_students)
+
+print(f"Můj rok státnic je {Student.class_year} má v třídě {Student.num_students} studentů")
+
+print(student1.name)
+print(student2.name)
+print(student3.name)
+print(student4.name)
+'''
+#DĚDIČNOST (Inheritance) = Umožňuje třídě zdědit atributy a metody z jiné třídy
+#                          Pomáhá s opětovným využitím kódu a jeho rozšiřitelností
+#                          class Child(Parent)
+'''
+class Animal:
+    def __init__(self, name):
+        self.name = name
+        self.is_alive = True
+
+    def eat(self):
+        print(f"{self.name} jí jídlo")
+
+    def sleep(self):
+        print(f"{self.name} spinká")
+
+class Dog(Animal):
+    def speak(self):
+        print("WOOF!")
+
+class Cat(Animal):
+    def speak(self):
+        print("MEOW!")
+
+class Mouse(Animal):
+    def speak(self):
+        print("SQUEEK!")
+
+dog = Dog("Johnny")
+cat = Cat("Garfield")
+mouse = Mouse("Mickey")
+
+print(mouse.name)
+print(mouse.is_alive)
+mouse.eat()
+mouse.sleep()
+dog.speak()
+'''
+# MULTIPLE INHERITANCE = Jeden Child dědí od více Parent
+#                        C(A, B)
+#        
+# MULTILEVEL INHERITANCE = Dědit od Parent který dědí od jiného Parent
+#                          C(B) <- B(A) <- A
+'''
+class Animal:
+    def __init__(self, name):
+        self.name = name
+
+    def eat(self):
+        print(f"{self.name} jí")
+
+    def sleep(self):
+        print(f"{self.name} spí")
+
+class Prey(Animal):
+    def flee(self):
+        print(f"{self.name} kořist utíká")
+
+class Predator(Animal):
+    def hunt(self):
+        print(f"{self.name} je na lovu")
+
+class Rabbit(Prey):
+    pass
+
+class Hawk(Predator):
+    pass
+
+class Fish(Prey, Predator):
+    pass
+
+rabbit = Rabbit("Bugs")
+hawk = Hawk("Tony")
+fish = Fish("Nemo")
+
+fish.hunt()
+rabbit.eat()
+hawk.sleep()
+'''
+# super() = Funkce používaná v podtřídě (child class) 
+#           ke volání metod z rodičovské třídy (superclass)
+#           Umožňuje rozšířit funkčnost zděděných metod místo jejich úplného přepsání
+'''
+class Shape:
+    def __init__(self,  color, filled):
+        self.color = color
+        self.filled = filled
+
+    def describe(self):
+        print(f"Barva je {self.color} a navíc {self.filled}")
+
+class Circle(Shape):
+    def __init__(self, color, filled, radius):
+        super().__init__(color, filled)         # Přemýšlej nad super() jako Shape(). Použiješ
+        self.radius = radius                    # konstruktor z třidy Shape
+
+    def describe(self):
+        super().describe()
+        print(f"Je to kruh s obshaem {3.14 * self.radius * self.radius} cm2")
+
+class Square(Shape):
+    def __init__(self, color, filled, width):
+        super().__init__(color, filled)
+        self.width = width
+
+    def describe(self):
+        super().describe()
+        print(f"Je to kruh s obshaem {self.width * self.width} cm2")
+
+class Triangle(Shape):
+    def __init__(self, color, filled, height, width):
+        super().__init__(color, filled)
+        self.width = width
+        self.height = height
+
+    def describe(self):
+        super().describe()
+        print(f"Je to kruh s obshaem {3.14 * self.width * self.height / 2} cm2")
+
+circle = Circle(color="red", filled=True, radius=5)
+square = Square(color="blue", filled=False, width=5)
+triangle = Triangle(color="yellow", filled=False, width=5, height=10)
+
+print(triangle.color)
+print(triangle.filled)
+print(f"{triangle.width} cm")
+print(f"{triangle.height} cm")
+
+circle.describe()
+square.describe()
+triangle.describe()
+'''
+# POLYMORPHISM = Řecké slovo pro "have many forms or faces"
+#                Poly = Many
+#                Morphe = Form
+#
+#                Dva způsoby jak dosáhnou polymorfismu:
+#                   1. Inheritance = An object could be treated of the same type as a parent class
+#                   2. "Duck typing" = Object musí mít nutné attributes/methods
+
 
 
 
